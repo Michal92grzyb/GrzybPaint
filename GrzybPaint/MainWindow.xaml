@@ -1,0 +1,91 @@
+﻿<Window x:Class="GrzybPaint.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GrzybPaint"
+        mc:Ignorable="d"
+        Title="GrzybPaint" Height="470" Width="525">
+    <Border Padding="5">
+        <StackPanel>
+            
+            <Border BorderThickness="1" BorderBrush="Black">
+                <InkCanvas ResizeEnabled="False" HorizontalAlignment="Stretch" Name="inkCanvas1" VerticalAlignment="Stretch" 
+                   Width="Auto" Gesture="inkCanvas1_Gesture" >
+                    <InkCanvas.DefaultDrawingAttributes>
+                        <DrawingAttributes Width="1"/>
+                    </InkCanvas.DefaultDrawingAttributes>
+                </InkCanvas>
+            </Border>
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Label Content="Cyan" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <Label Content="Magenta" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <Label Content="Yellow" FontWeight="Bold" HorizontalAlignment="Right"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Name="TextBlockC" Padding="6" TextAlignment="Center" />
+                    <TextBlock Name="TextBlockM" Padding="6" TextAlignment="Center" />
+                    <TextBlock Name="TextBlockY" Padding="6" TextAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <Slider Maximum="255" Margin="5" Name="SliderC" ValueChanged="SliderC_ValueChanged"/>
+                    <Slider Maximum="255" Margin="5" Name="SliderM" ValueChanged="SliderM_ValueChanged"/>
+                    <Slider Maximum="255" Margin="5" Name="SliderY" ValueChanged="SliderY_ValueChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3">
+                    <Label Content="Actual color:"  HorizontalAlignment="Center"/>
+                    <Rectangle Name="ColorRectangle" Grid.Column="2" Fill="White" Height="45"/>
+                </StackPanel>
+                
+            </Grid>
+            
+            <TextBlock Text="Drawing options"  TextAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Every single point" Margin="5"
+                VerticalAlignment="Top" Click="ClearButton_Click" Grid.Column="0"/>
+                <Button Content="Every second point" Margin="5"
+                VerticalAlignment="Top" Click="SaveButton_Click" Grid.Column="1"/>
+                <Button Content="Every third point" Margin="5"
+                VerticalAlignment="Top" Click="CloseButton_Click" Grid.Column="2"/>
+            </Grid>
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Clear"  Name="ClearButton" Margin="5"
+                VerticalAlignment="Top" Click="ClearButton_Click" Grid.Column="0"/>
+                <Button Content="Save"  Name="SaveButton" Margin="5"
+                VerticalAlignment="Top" Click="SaveButton_Click" Grid.Column="1"/>
+                <Button Content="Close"  Name="CloseButton" Margin="5"
+                VerticalAlignment="Top" Click="CloseButton_Click" Grid.Column="3"/>
+                <Button Content="Configuration"  Name="ConfigurationButton" Margin="5"
+                VerticalAlignment="Top" Click="ConfigurationButton_Click" Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
