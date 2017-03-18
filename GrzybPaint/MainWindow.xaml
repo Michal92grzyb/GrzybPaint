@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:GrzybPaint"
         mc:Ignorable="d"
         Title="GrzybPaint" Height="470" Width="525">
+
     <Border Padding="5">
         <StackPanel>
             
