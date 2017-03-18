@@ -4,18 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrzybPaint"
-        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:GrzybPaint.ViewModel"
         Title="GrzybPaint" Height="470" Width="525">
 
+    <Window.Resources>
+        <vm:DrawingColorEdit x:Key="drawingColorEdit"/>
+    </Window.Resources>
+    
     <Border Padding="5">
-        <StackPanel>
+        <StackPanel DataContext="{StaticResource drawingColorEdit}">
             
             <Border BorderThickness="1" BorderBrush="Black">
-                <InkCanvas ResizeEnabled="False" HorizontalAlignment="Stretch" Name="inkCanvas1" VerticalAlignment="Stretch" 
+                <InkCanvas ResizeEnabled="False" HorizontalAlignment="Stretch" x:Name="inkCanvas1" VerticalAlignment="Stretch" 
                    Width="Auto" Gesture="inkCanvas1_Gesture" >
                     <InkCanvas.DefaultDrawingAttributes>
-                        <DrawingAttributes Width="1"/>
+                        <DrawingAttributes Width="1" />
                     </InkCanvas.DefaultDrawingAttributes>
+                    <InkCanvas.Resources>
+                        <SolidColorBrush x:Key="Color" Color="{Binding Path=Color}"/>
+                    </InkCanvas.Resources>
                 </InkCanvas>
             </Border>
 
@@ -41,14 +48,18 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="2">
-                    <Slider Maximum="255" Margin="5" Name="SliderC" ValueChanged="SliderC_ValueChanged"/>
-                    <Slider Maximum="255" Margin="5" Name="SliderM" ValueChanged="SliderM_ValueChanged"/>
-                    <Slider Maximum="255" Margin="5" Name="SliderY" ValueChanged="SliderY_ValueChanged"/>
+                    <Slider Maximum="255" Margin="5" x:Name="SliderR" Value="{Binding R, Mode=TwoWay}"/>
+                    <Slider Maximum="255" Margin="5" x:Name="SliderG" Value="{Binding G, Mode=TwoWay}"/>
+                    <Slider Maximum="255" Margin="5" x:Name="SliderB" Value="{Binding B, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="3">
                     <Label Content="Actual color:"  HorizontalAlignment="Center"/>
-                    <Rectangle Name="ColorRectangle" Grid.Column="2" Fill="White" Height="45"/>
+                    <Rectangle x:Name="ColorRectangle" Grid.Column="2" Stroke="Black" Height="45">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding Path=Color, Mode=OneWay}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
                 </StackPanel>
                 
             </Grid>
@@ -62,11 +73,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Content="Every single point" Margin="5"
-                VerticalAlignment="Top" Click="ClearButton_Click" Grid.Column="0"/>
+                VerticalAlignment="Top" Grid.Column="0"/>
                 <Button Content="Every second point" Margin="5"
-                VerticalAlignment="Top" Click="SaveButton_Click" Grid.Column="1"/>
+                VerticalAlignment="Top" Grid.Column="1"/>
                 <Button Content="Every third point" Margin="5"
-                VerticalAlignment="Top" Click="CloseButton_Click" Grid.Column="2"/>
+                VerticalAlignment="Top" Grid.Column="2"/>
             </Grid>
 
             <Grid>
@@ -78,13 +89,13 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Clear"  Name="ClearButton" Margin="5"
+                <Button Content="Clear"  x:Name="ClearButton" Margin="5"
                 VerticalAlignment="Top" Click="ClearButton_Click" Grid.Column="0"/>
-                <Button Content="Save"  Name="SaveButton" Margin="5"
+                <Button Content="Save"  x:Name="SaveButton" Margin="5"
                 VerticalAlignment="Top" Click="SaveButton_Click" Grid.Column="1"/>
-                <Button Content="Close"  Name="CloseButton" Margin="5"
+                <Button Content="Close"  x:Name="CloseButton" Margin="5"
                 VerticalAlignment="Top" Click="CloseButton_Click" Grid.Column="3"/>
-                <Button Content="Configuration"  Name="ConfigurationButton" Margin="5"
+                <Button Content="Configuration"  x:Name="ConfigurationButton" Margin="5"
                 VerticalAlignment="Top" Click="ConfigurationButton_Click" Grid.Column="2"/>
             </Grid>
         </StackPanel>

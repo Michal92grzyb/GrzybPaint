@@ -24,13 +24,20 @@ namespace GrzybPaint
         public MainWindow()
         {
             InitializeComponent();
-            SliderC_ValueChanged(null, null);
-            SliderM_ValueChanged(null, null);
-            SliderY_ValueChanged(null, null);
         }
 
         private void inkCanvas1_Gesture(object sender, InkCanvasGestureEventArgs e)
         {
+
+            int count = 0;
+            foreach(var stroke in inkCanvas1.Strokes)
+            {
+                count++;
+                if (count == 20)
+                {
+                    inkCanvas1.DefaultDrawingAttributes.Color = Colors.BlanchedAlmond;
+                }
+            }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -74,31 +81,6 @@ namespace GrzybPaint
                     encoder.Save(fs);
                 }
             }
-        }
-
-        private void SliderC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TextBlockC.Text = Convert.ToString((byte)SliderC.Value);
-            Slider_ValueChanged();
-        }
-
-        private void SliderM_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TextBlockM.Text = Convert.ToString((byte)SliderM.Value);
-            Slider_ValueChanged();
-        }
-
-        private void SliderY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TextBlockY.Text = Convert.ToString((byte)SliderY.Value);
-            Slider_ValueChanged();
-        }
-
-        private void Slider_ValueChanged()
-        {
-            Color drawingColor = Color.FromRgb((byte)SliderC.Value, (byte)SliderM.Value, (byte)SliderY.Value);
-            ColorRectangle.Fill = new SolidColorBrush(drawingColor);
-            inkCanvas1.DefaultDrawingAttributes.Color = drawingColor;
         }
 
         private void ConfigurationButton_Click(object sender, RoutedEventArgs e)
