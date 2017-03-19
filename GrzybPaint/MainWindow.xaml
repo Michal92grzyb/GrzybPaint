@@ -15,14 +15,8 @@
         <StackPanel DataContext="{StaticResource drawingColorEdit}">
             
             <Border BorderThickness="1" BorderBrush="Black">
-                <InkCanvas ResizeEnabled="False" HorizontalAlignment="Stretch" x:Name="inkCanvas1" VerticalAlignment="Stretch" 
+                <InkCanvas DefaultDrawingAttributes="{Binding Path=DrawingAttributes, Mode=OneWay}"  ResizeEnabled="False" HorizontalAlignment="Stretch" x:Name="inkCanvas1" VerticalAlignment="Stretch" 
                    Width="Auto" Gesture="inkCanvas1_Gesture" >
-                    <InkCanvas.DefaultDrawingAttributes>
-                        <DrawingAttributes Width="1" />
-                    </InkCanvas.DefaultDrawingAttributes>
-                    <InkCanvas.Resources>
-                        <SolidColorBrush x:Key="Color" Color="{Binding Path=Color}"/>
-                    </InkCanvas.Resources>
                 </InkCanvas>
             </Border>
 
@@ -36,15 +30,15 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    <Label Content="Cyan" FontWeight="Bold" HorizontalAlignment="Right"/>
-                    <Label Content="Magenta" FontWeight="Bold" HorizontalAlignment="Right"/>
-                    <Label Content="Yellow" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <Label Content="Red" Padding="6" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <Label Content="Green" Padding="6" FontWeight="Bold" HorizontalAlignment="Right"/>
+                    <Label Content="Blue" Padding="6" FontWeight="Bold" HorizontalAlignment="Right"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
-                    <TextBlock Name="TextBlockC" Padding="6" TextAlignment="Center" />
-                    <TextBlock Name="TextBlockM" Padding="6" TextAlignment="Center" />
-                    <TextBlock Name="TextBlockY" Padding="6" TextAlignment="Center" />
+                    <TextBlock x:Name="TextBlockC" Text="{Binding R, Mode=OneWay}" Padding="6" TextAlignment="Center" />
+                    <TextBlock x:Name="TextBlockM" Text="{Binding G, Mode=OneWay}" Padding="6" TextAlignment="Center" />
+                    <TextBlock x:Name="TextBlockY" Text="{Binding B, Mode=OneWay}" Padding="6" TextAlignment="Center" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="2">

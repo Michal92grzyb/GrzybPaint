@@ -9,10 +9,11 @@ namespace GrzybPaint.ViewModel
     using Model;
     using System.ComponentModel;
     using System.Windows.Controls;
+    using System.Windows.Ink;
     using System.Windows.Media;
     public class DrawingColorEdit : INotifyPropertyChanged
     {
-        private readonly DrawingColor drawingColor = new DrawingColor(0,0,0);
+        private readonly DrawingColor drawingColor = new DrawingColor(0,200,0);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -70,10 +71,20 @@ namespace GrzybPaint.ViewModel
         {
             get
             {
+                canvas.DefaultDrawingAttributes.Color = drawingColor.ToColor(); // Dlaczego to działa?!
                 return drawingColor.ToColor();
             }
         }
 
+        private readonly InkCanvas canvas = new InkCanvas();
+
+        public DrawingAttributes DrawingAttributes
+        {
+            get
+            {
+                return canvas.DefaultDrawingAttributes;
+            }
+        }
         
     }
 
