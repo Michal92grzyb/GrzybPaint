@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:GrzybPaint"
         mc:Ignorable="d"
         Title="ConfigurationWindow" Height="230" Width="250">
+    <!-- Tu nie działa nic. -->
     <Border Padding="5">
         <StackPanel>
 

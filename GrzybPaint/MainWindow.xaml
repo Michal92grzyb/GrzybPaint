@@ -9,14 +9,16 @@
 
     <Window.Resources>
         <vm:DrawingColorEdit x:Key="drawingColorEdit"/>
+        <!-- StrokeEdit powinien być w jednej klasie bo nie mogę dać dwóch kontekstów do inkCnavas -->
+        <vm:StrokeEdit x:Key="strokeEdit"/>
     </Window.Resources>
     
     <Border Padding="5">
         <StackPanel DataContext="{StaticResource drawingColorEdit}">
             
             <Border BorderThickness="1" BorderBrush="Black">
-                <InkCanvas DefaultDrawingAttributes="{Binding Path=DrawingAttributes, Mode=OneWay}"  ResizeEnabled="False" HorizontalAlignment="Stretch" x:Name="inkCanvas1" VerticalAlignment="Stretch" 
-                   Width="Auto" Gesture="inkCanvas1_Gesture" >
+                <InkCanvas DefaultDrawingAttributes="{Binding Path=DrawingAttributes, Mode=OneWay}" ResizeEnabled="False" HorizontalAlignment="Stretch" x:Name="inkCanvas1" VerticalAlignment="Stretch" 
+                   Width="Auto" Strokes="{Binding Path=Signature}" >
                 </InkCanvas>
             </Border>
 
@@ -67,7 +69,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Content="Every single point" Margin="5"
-                VerticalAlignment="Top" Grid.Column="0"/>
+                VerticalAlignment="Top" Grid.Column="0" />
                 <Button Content="Every second point" Margin="5"
                 VerticalAlignment="Top" Grid.Column="1"/>
                 <Button Content="Every third point" Margin="5"

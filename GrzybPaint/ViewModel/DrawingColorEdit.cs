@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GrzybPaint;
 
 namespace GrzybPaint.ViewModel
 {
     using Model;
+
     using System.ComponentModel;
     using System.Windows.Controls;
     using System.Windows.Ink;
+    using System.Windows.Input;
     using System.Windows.Media;
     public class DrawingColorEdit : INotifyPropertyChanged
     {
-        private readonly DrawingColor drawingColor = new DrawingColor(0,200,0);
+        // wczytanie danych przy wlaczeniu programu
+        private readonly DrawingColor drawingColor = SettingsInfo.ReadColor();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,6 +27,7 @@ namespace GrzybPaint.ViewModel
             }
         }
 
+        #region RGBconstuctors
         public byte R
         {
             get
@@ -66,7 +66,9 @@ namespace GrzybPaint.ViewModel
                 OnPropertyChanged("B", "Color");
             }
         }
+        #endregion
 
+        #region ColorAndCanvasConstructors
         public Color Color
         {
             get
@@ -85,11 +87,18 @@ namespace GrzybPaint.ViewModel
                 return canvas.DefaultDrawingAttributes;
             }
         }
+        #endregion
         
     }
 
+    
     static class Extensions
     {
+        /// <summary>
+        /// Zamienia DrawingColor na parametr, ktory moze byc wykorzystany przez InkCanvas.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static Color ToColor(this DrawingColor color)
         {
             return new Color()

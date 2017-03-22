@@ -57,7 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SettingsInfo.cs" />
     <Compile Include="ViewModel\DrawingColorEdit.cs" />
+    <Compile Include="ViewModel\Stroke.cs" />
+    <Compile Include="ViewModel\Test.cs" />
     <Page Include="ConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

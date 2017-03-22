@@ -21,37 +21,31 @@ namespace GrzybPaint
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region constructor
         public MainWindow()
         {
             InitializeComponent();
+            // ...
+            SettingsInfo.ReadColor();
         }
+        #endregion
 
-        private void inkCanvas1_Gesture(object sender, InkCanvasGestureEventArgs e)
-        {
-
-            int count = 0;
-            foreach(var stroke in inkCanvas1.Strokes)
-            {
-                count++;
-                if (count == 20)
-                {
-                    inkCanvas1.DefaultDrawingAttributes.Color = Colors.BlanchedAlmond;
-                }
-            }
-        }
-
+        #region ClickButton
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            // To też nie powinno być w code-behind.
             this.inkCanvas1.Strokes.Clear();
-            MessageBox.Show("Canvas cleared.");
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("See ya!");
+            // To jest najgorsza rzecz, jaką mogłem zrobić.
+            // SettingsInfo.SaveColor(new Model.DrawingColor((byte)SliderR.Value, (byte)SliderG.Value, (byte)SliderB.Value));
             this.Close();
         }
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // Też trzeba wyrzucić do viewmodel (i SaveFileDialog do modelu?)
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = "savedimage"; // Default file name
             dlg.DefaultExt = ".jpg"; // Default file extension
@@ -74,6 +68,8 @@ namespace GrzybPaint
                 new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Default);
                 rtb.Render(inkCanvas1);
 
+                // TODO: obsługa błędów przy pliku
+
                 using (FileStream fs = new FileStream(filename, FileMode.Create))
                 {
                     BmpBitmapEncoder encoder = new BmpBitmapEncoder();
@@ -85,12 +81,15 @@ namespace GrzybPaint
 
         private void ConfigurationButton_Click(object sender, RoutedEventArgs e)
         {
+            // Brak pomysłów na wyrzucenie tego.
+            // Nie wiem, jak robić, żeby pierwsze okno było spowrotem aktywne po wyłączeniu tego. Coś z window.parent, czy jakoś tak.
+
             Window configurationWindow = new ConfigurationWindow();
             configurationWindow.Show();
             //this.IsEnabled = false;
             configurationWindow.Topmost = true;
             //configurationWindow.Focus();
         }
-        
+#endregion
     }
 }
